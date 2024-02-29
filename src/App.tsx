@@ -2,9 +2,33 @@ import { useState } from 'react'
 import { FaLinkedin, FaGithub, FaYoutube } from 'react-icons/fa'
 import mdFoto from './assets/md.jpg'
 import mdCurriculo from './assets/md-curriculo.pdf'
+import { sendMessage } from './services'
+import { toast } from 'react-toastify'
+
+const THREE_SECONDS = 3000
 
 function App () {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [message, setMessage] = useState('')
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value)
+  }
+
+  const handleSendMessage = async () => {
+    console.log('Enviando mensagem:', message)
+    try {
+      await sendMessage(message)
+      setMessage('')
+      toast.success('Mensagem enviada com sucesso!')
+      setTimeout(() => {
+        setIsModalOpen(false)
+      }, THREE_SECONDS)
+    } catch (error) {
+      console.error(error)
+      toast.error('Erro ao enviar mensagem!')
+    }
+  }
 
   return (
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -22,7 +46,7 @@ function App () {
             back-end, atuando principalmente em projetos de processamento de
             pagamentos, marketplaces e geoprocessamento.
           </p>
-          <br />
+          <br/>
           <p className="text-gray-300 text-justify">
             Possuo habilidades avançadas em JavaScript, TypeScript, Node.js,
             Express.js e MongoDB, além de conhecimento em Docker, Nest.js,
@@ -35,7 +59,8 @@ function App () {
           </p>
           <br />
           <p className="text-gray-300 text-justify">
-            Em relação ao front-end, estou familiarizado com React, Redux, Redux Toll Kit, React Router Dom entre outras bibliotecas.
+            Em relação ao front-end, estou familiarizado com React, Redux, Redux
+            Toll Kit, React Router Dom entre outras bibliotecas.
           </p>
           <br />
           <p className="text-gray-300 text-justify">
@@ -52,19 +77,20 @@ function App () {
             <a
               href={mdCurriculo}
               download="Márcio Daniel - Currículo.pdf"
-              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 text-sm transition ease-in-out duration-150"
+              className="inline-block bg-cyan-800 text-white py-2 px-4 rounded hover:bg-cyan-900 text-sm transition ease-in-out duration-150 text-center leading-normal"
             >
-              Baixe meu Currículo
+              Baixar meu Currículo
             </a>
+
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 text-sm transition ease-in-out duration-150"
+              className="bg-cyan-800 text-white py-2 px-4 rounded hover:bg-cyan-900 text-sm transition ease-in-out duration-150"
             >
-              Me mande uma mensagem
+              Enviar uma mensagem
             </button>
           </div>
 
-          <div className="mt-4 flex gap-4 bg-white w-full justify-center items-center p-2">
+          <div className="mt-4 flex gap-4 bg-white w-full justify-center items-center p-2 rounded">
             <a
               href="https://www.linkedin.com/in/marciodanielll/"
               className="text-blue-700 hover:text-blue-500 flex items-center gap-2"
@@ -91,19 +117,21 @@ function App () {
         <div className="fixed inset-0 bg-gray-900 flex justify-center items-center">
           <div className="bg-white p-8 md:p-12 rounded shadow-lg relative w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-1/6 max-h-full mx-auto my-6 bg-gray-900">
             <textarea
-              className="w-full h-60 rounded"
+              className="w-full h-60 rounded focus:outline-none "
               placeholder="Sua mensagem"
+              value={message}
+              onChange={handleChange}
             ></textarea>
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-around items-center mt-4">
               <button
-                onClick={() => setIsModalOpen(false)}
-                className="bg-green-500 text-white p-2 rounded hover:bg-green-400"
+                onClick={handleSendMessage}
+                className="bg-cyan-800 text-white p-2 rounded hover:bg-cyan-900 text-center"
               >
                 Enviar
               </button>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="bg-red-500 text-white p-2 rounded hover:bg-red-400"
+                className="bg-red-500 text-white p-2 rounded hover:bg-red-400 text-center"
               >
                 Fechar
               </button>
