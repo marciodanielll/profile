@@ -6,6 +6,7 @@ import { sendMessage } from './services'
 import { toast } from 'react-toastify'
 
 const THREE_SECONDS = 3000
+const KNE_SECONDS = 2000
 
 function App () {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,9 +20,12 @@ function App () {
     console.log('Enviando mensagem:', message)
     try {
       await sendMessage(message)
-      setMessage('')
-      toast.success('Mensagem enviada com sucesso!')
+      toast.success('Mensagem enviada com sucesso!', {
+        autoClose: KNE_SECONDS,
+        position: 'top-center'
+      })
       setTimeout(() => {
+        setMessage('')
         setIsModalOpen(false)
       }, THREE_SECONDS)
     } catch (error) {
