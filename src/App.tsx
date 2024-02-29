@@ -7,11 +7,11 @@ function App () {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center">
-      <div className="bg-gray-700 p-6 rounded-lg shadow-lg max-w-lg overflow-hidden">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8">
+      <div className="bg-gray-700 p-4 rounded-lg shadow-lg max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto overflow-hidden">
         <div className="flex flex-col items-center">
           <img
-            className="mb-4 w-32 h-32 rounded-full shadow-lg"
+            className="mb-4 w-24 h-24 sm:w-32 sm:h-32 rounded-full shadow-lg"
             src={mdFoto}
             alt="Perfil"
           />
@@ -35,7 +35,7 @@ function App () {
           </p>
           <br />
           <p className="text-gray-300 text-justify">
-            Em relação ao front-end, estou familiarizado com React e Redux..
+            Em relação ao front-end, estou familiarizado com React, Redux, Redux Toll Kit, React Router Dom entre outras bibliotecas.
           </p>
           <br />
           <p className="text-gray-300 text-justify">
@@ -48,18 +48,17 @@ function App () {
             de Software voluntário na ONG Palavra de Paz e como Instrutor de
             Programação voluntário na ONG Programadores do Amanhã.
           </p>
-
           <div className="mt-4 flex gap-4 w-full justify-center items-center p-2">
             <a
               href={mdCurriculo}
               download="Márcio Daniel - Currículo.pdf"
-              className="bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800 text-sm transition ease-in-out duration-150"
+              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 text-sm transition ease-in-out duration-150"
             >
               Baixe meu Currículo
             </a>
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-green-700 text-white py-1 px-3 rounded hover:bg-green-800 text-sm transition ease-in-out duration-150"
+              className="bg-green-700 text-white py-2 px-4 rounded hover:bg-green-800 text-sm transition ease-in-out duration-150"
             >
               Me mande uma mensagem
             </button>
@@ -90,7 +89,7 @@ function App () {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-gray-900 flex justify-center items-center">
-          <div className="bg-white p-8 md:p-12 rounded shadow-lg relative w-2/6 max-h-full mx-auto my-6 bg-gray-900">
+          <div className="bg-white p-8 md:p-12 rounded shadow-lg relative w-5/6 sm:w-4/6 md:w-3/6 lg:w-2/6 xl:w-1/6 max-h-full mx-auto my-6 bg-gray-900">
             <textarea
               className="w-full h-60 rounded"
               placeholder="Sua mensagem"
